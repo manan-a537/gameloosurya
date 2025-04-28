@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - God of War Ragnarök | Gameloo Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Norse', 'Times New Roman', serif;
+    }
+    @font-face {
+      font-family: 'Norse';
+      src: url('https://cdn.statically.io/gh/googlefonts/noto-fonts/main/hinted/ttf/NotoSansRunic/NotoSansRunic-Regular.ttf') format('truetype');
+    }
+    body {
+      background-color: #0a0c10;
+      color: #d9d5c3;
+      padding: 20px;
+      background-image: url('https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #a37c34;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: rgba(10, 12, 16, 0.7);
+      padding: 8px 15px;
+      border-radius: 4px;
+      border: 1px solid #a37c34;
+      letter-spacing: 1px;
+    }
+    .back-button:hover {
+      background-color: rgba(163, 124, 52, 0.2);
+    }
+    .checkout-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(10, 12, 16, 0.9);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(163, 124, 52, 0.3);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      color: #d9d5c3;
+      border: 1px solid #a37c34;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #a37c34;
+      text-align: center;
+      text-shadow: 0 0 5px rgba(163, 124, 52, 0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .payment-section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #a37c34;
+      border-bottom: 1px solid #a37c34;
+      padding-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: rgba(30, 30, 30, 0.7);
+    }
+    .payment-option:hover {
+      border-color: #a37c34;
+      background-color: rgba(163, 124, 52, 0.1);
+    }
+    .payment-option.selected {
+      border-color: #a37c34;
+      background-color: rgba(163, 124, 52, 0.2);
+      box-shadow: 0 0 10px rgba(163, 124, 52, 0.3);
+    }
+    .payment-icon {
+      width: 40px;
+      height: 25px;
+      margin-right: 15px;
+      object-fit: contain;
+      filter: sepia(100%) brightness(1.2);
+    }
+    .payment-details {
+      flex-grow: 1;
+    }
+    .payment-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #d9d5c3;
+    }
+    .payment-description {
+      font-size: 14px;
+      color: #8a887d;
+    }
+    .order-summary {
+      background-color: rgba(30, 30, 30, 0.7);
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 30px;
+      border: 1px solid #a37c34;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .order-item-title {
+      font-weight: bold;
+      color: #a37c34;
+    }
+    .order-item-value {
+      text-align: right;
+      color: #d9d5c3;
+    }
+    .divider {
+      height: 1px;
+      background-color: #a37c34;
+      margin: 15px 0;
+      opacity: 0.5;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .rewards-notice {
+      font-size: 14px;
+      color: #8a887d;
+      margin: 15px 0;
+    }
+    .creator-code {
+      margin: 15px 0;
+    }
+    .creator-code label {
+      color: #a37c34;
+    }
+    .creator-code input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      margin-top: 5px;
+      background-color: rgba(30, 30, 30, 0.7);
+      color: #d9d5c3;
+    }
+    .creator-code input:focus {
+      border-color: #a37c34;
+      outline: none;
+    }
+    .checkbox-container {
+      margin: 15px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      color: #8a887d;
+    }
+    .checkbox-container input {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .help-link {
+      display: block;
+      margin: 15px 0;
+      color: #a37c34;
+      text-decoration: none;
+    }
+    .help-link:hover {
+      text-decoration: underline;
+    }
+    .legal-text {
+      font-size: 12px;
+      color: #6a6860;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #a37c34;
+      color: #0a0c10;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .place-order-btn:hover {
+      background-color: #8e6b2d;
+    }
+    .game-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+      border: 1px solid #a37c34;
+    }
+    .payment-form {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background-color: rgba(10, 12, 16, 0.95);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      border-left: 1px solid #a37c34;
+      color: #d9d5c3;
+    }
+    .payment-form.show {
+      right: 0;
+    }
+    .payment-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .payment-form-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #a37c34;
+    }
+    .close-payment-form {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #a37c34;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #a37c34;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      background-color: rgba(30, 30, 30, 0.7);
+      color: #d9d5c3;
+    }
+    .form-group input:focus {
+      border-color: #a37c34;
+      outline: none;
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    .submit-payment {
+      width: 100%;
+      padding: 12px;
+      background-color: #a37c34;
+      color: #0a0c10;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      text-transform: uppercase;
+    }
+    .submit-payment:hover {
+      background-color: #8e6b2d;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .payment-form {
+        max-width: 100%;
+      }
+    }
+    /* Rune glow effect */
+    @keyframes runeGlow {
+      0% { opacity: 0.6; text-shadow: 0 0 5px rgba(163, 124, 52, 0.5); }
+      50% { opacity: 1; text-shadow: 0 0 15px rgba(163, 124, 52, 0.8); }
+      100% { opacity: 0.6; text-shadow: 0 0 5px rgba(163, 124, 52, 0.5); }
+    }
+    .rune-glow {
+      animation: runeGlow 3s infinite;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="products.html">← Back to Midgard</a>
+  
+  <div class="checkout-container">
+    <h1 class="rune-glow">VALHALLA CHECKOUT</h1>
+    
+    <div class="payment-section">
+      <h2 class="section-title">VALKYRIE REWARDS</h2>
+      <div class="payment-option">
+        <div class="payment-details">
+          <div class="payment-title">Hacksilver</div>
+          <div class="payment-description">0 Silver</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-section">
+      <h2 class="section-title">PAYMENT METHODS</h2>
+      <div class="payment-option selected" id="creditCardOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" class="payment-icon" alt="Credit Card">
+        <div class="payment-details">
+          <div class="payment-title">Aesir Card</div>
+          <div class="payment-description">Visa, Mastercard, Jörmungandr Express</div>
+        </div>
+      </div>
+      <div class="payment-option" id="paypalOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" class="payment-icon" alt="PayPal">
+        <div class="payment-details">
+          <div class="payment-title">Bifröst Payment</div>
+          <div class="payment-description">Pay across the realms</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="order-summary">
+      <h2 class="section-title">TREASURE HOARD</h2>
+      <div class="order-item">
+        <div style="display: flex; align-items: center;">
+          <img src="https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png" class="game-image" alt="God of War Ragnarök">
+          <div>
+            <div class="order-item-title">God of War Ragnarök</div>
+            <div>Sony Santa Monica</div>
+          </div>
+        </div>
+        <div class="order-item-value">₹170</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item">
+        <div class="order-item-title">Price</div>
+        <div class="order-item-value">₹170</div>
+      </div>
+      <div class="order-item">
+        <div class="order-item-title">Jötunheim Tax (18%)</div>
+        <div class="order-item-value">₹30</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item total">
+        <div class="order-item-title">Total</div>
+        <div class="order-item-value">₹200</div>
+      </div>
+      
+      <div class="rewards-notice">
+        Earn 250 Hacksilver with this purchase.
+      </div>
+    </div>
+    
+    <div class="creator-code">
+      <label for="creatorCode">Enter Rune Code (Optional)</label>
+      <input type="text" id="creatorCode" placeholder="ᚠᚢᚦᚨᚱᚲ">
+    </div>
+    
+    <div class="checkbox-container">
+      <input type="checkbox" id="shareEmail">
+      <label for="shareEmail">I agree to receive ravens from the Allfather about future battles and offers.</label>
+    </div>
+    
+    <a href="#" class="help-link">Need Help? Summon Mimir</a>
+    
+    <div class="legal-text">
+      By the laws of Asgard, this purchase is binding across all Nine Realms. No refunds will be granted by the Dwarven Smiths.
+    </div>
+    
+    <div class="legal-text">
+      By clicking "Forge Order", I swear I am of Viking age and authorized to use this payment method. I agree to the Terms of the Aesir.
+    </div>
+    
+    <button class="place-order-btn" onclick="placeOrder()">FORGE ORDER</button>
+  </div>
+
+  <!-- Payment Form Overlay -->
+  <div class="overlay" id="paymentOverlay"></div>
+
+  <!-- Credit Card Payment Form -->
+  <div class="payment-form" id="creditCardForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Aesir Card Details</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <form id="creditCardDetails">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+      </div>
+      <div class="form-group">
+        <label for="cardName">Name on Card</label>
+        <input type="text" id="cardName" placeholder="Kratos of Sparta" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">Rune Code</label>
+          <input type="text" id="cvv" placeholder="ᚦᛟᚱ" required>
+        </div>
+      </div>
+      <button type="submit" class="submit-payment">Pay ₹200</button>
+    </form>
+  </div>
+
+  <!-- PayPal Payment Form -->
+  <div class="payment-form" id="paypalForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Bifröst Payment</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <div style="text-align: center; margin: 30px 0;">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" style="width: 150px; margin-bottom: 20px; filter: sepia(100%) brightness(1.2);" alt="PayPal">
+      <p>You will be transported across the Bifröst to complete your payment</p>
+      <p>Total Amount: ₹200</p>
+    </div>
+    <button class="submit-payment" onclick="processPayPalPayment()">Open Bifröst</button>
+  </div>
+
+  <script>
+    // Payment method selection
+    document.getElementById('creditCardOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('paypalOption').classList.remove('selected');
+      showPaymentForm('creditCardForm');
+    });
+    
+    document.getElementById('paypalOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('creditCardOption').classList.remove('selected');
+      showPaymentForm('paypalForm');
+    });
+    
+    // Show payment form
+    function showPaymentForm(formId) {
+      document.getElementById('paymentOverlay').classList.add('show');
+      document.getElementById(formId).classList.add('show');
+    }
+    
+    // Close payment form
+    function closePaymentForm() {
+      document.getElementById('paymentOverlay').classList.remove('show');
+      document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.remove('show');
+      });
+    }
+    
+    // Process credit card payment
+    document.getElementById('creditCardDetails').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Payment accepted by the Allfather! Your game will be delivered by Valkyrie.');
+      closePaymentForm();
+    });
+    
+    // Process PayPal payment
+    function processPayPalPayment() {
+      alert('Bifröst opening... Prepare for realm travel.');
+      closePaymentForm();
+    }
+    
+    // Place order function
+    function placeOrder() {
+      const paymentMethod = document.querySelector('.payment-option.selected .payment-title').textContent;
+      if (paymentMethod.includes('Aesir') || paymentMethod.includes('Bifröst')) {
+        showPaymentForm(paymentMethod.includes('Aesir') ? 'creditCardForm' : 'paypalForm');
+      } else {
+        alert(`Order forged in the fires of Svartalfheim! Your game is on its way.`);
+      }
+    }
+    
+    // Close payment form when clicking overlay
+    document.getElementById('paymentOverlay').addEventListener('click', closePaymentForm);
+    
+    // Rune code generator
+    const runes = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', 'ᚺ', 'ᚾ', 'ᛁ', 'ᛃ', 'ᛇ', 'ᛈ', 'ᛉ', 'ᛊ', 'ᛏ', 'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛟ', 'ᛞ'];
+    const creatorCode = document.getElementById('creatorCode');
+    
+    creatorCode.addEventListener('focus', function() {
+      if (this.value === '') {
+        this.value = runes[Math.floor(Math.random() * runes.length)] + 
+                     runes[Math.floor(Math.random() * runes.length)] + 
+                     runes[Math.floor(Math.random() * runes.length)];
+      }
+    });
+    
+    // Random rune glow effects
+    setInterval(() => {
+      const elements = document.querySelectorAll('.section-title, .order-item-title');
+      const randomElement = elements[Math.floor(Math.random() * elements.length)];
+      randomElement.classList.add('rune-glow');
+      setTimeout(() => randomElement.classList.remove('rune-glow'), 3000);
+    }, 5000);
+  </script>
+</body>
+</html>

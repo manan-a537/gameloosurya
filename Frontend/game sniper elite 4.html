@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sniper Elite 4</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #000;
+      color: white;
+      padding: 10px 40px;
+      border: 2px solid white;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .back-button:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .game-detail-image {
+      width: 40%;
+      height: 700px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .rating {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+    
+    .rating .stars {
+      color: #FFD700;
+      margin-right: 10px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #00c853;
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    .buy-now {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00BB00;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .buy-now:hover {
+      background-color: #009900;
+      transform: translateY(-2px);
+    }
+
+    .buy-now:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+
+    .screenshots img,
+    .pc-specs img {
+      width: 70%;
+      border-radius: 5%;
+      margin-bottom: 15px;
+    }
+
+    .about-game {
+      margin-top: 40px;
+    }
+
+    .about-game h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00b4ff;
+    }
+
+    .about-game p {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .trailer-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .trailer-section h2 {
+      margin-bottom: 15px;
+      color: #00b4ff;
+    }
+
+    .trailer-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+
+    .trailer-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="back-buttons">
+    <a href="#" class="back-button" id="backButton">Back</a>
+  </div>
+
+  <h1>Sniper Elite 4</h1>
+  <img class="game-detail-image" src="sniperelite4.avif" alt="Sniper Elite 4" />
+
+  <div class="rating">
+    <span class="stars">★ ★ ★ ★ ☆</span>
+    <span>4.5</span>
+  </div>
+
+  <div class="buttons">
+    <button class="buy-now" id="checkout-button">BUY NOW</button>
+  </div>
+
+  <!-- Updated Trailer Section with new YouTube link -->
+  <div class="trailer-section">
+    <h2>Watch the Trailer</h2>
+    <div class="trailer-container">
+      <iframe 
+        src="https://www.youtube.com/embed/TzWhGMdmWWs" 
+        title="Sniper Elite 4 Official Trailer"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="screenshots">
+    <h2>Screenshots :</h2>
+    <img src="sniper 1.jpg" alt="Sniper Elite 4 gameplay" />
+    <img src="sniper 2.jpg" alt="X-ray kill cam" />
+    <img src="sniper 3.jpg" alt="Italian countryside setting" />
+  </div>
+
+  <div class="pc-specs">
+    <h2 style="color: red;">Note - PC Specifications</h2>
+    <img src="sniperreq.jpg" alt="PC Specification Table">
+  </div>
+
+  <div class="about-game">
+    <h2>About The Game</h2>
+    <p>
+      Sniper Elite 4 delivers the definitive World War II sniping experience, with genre-leading ballistics and 
+      unprecedented freedom in how you approach your objectives. Set in the stunning landscapes of Italy after 
+      the fall of Mussolini, you play as elite marksman Karl Fairburne, helping the brave men and women of the 
+      Italian Resistance fight back against the Nazi war machine. Featuring the series' signature X-ray kill cam, 
+      massive open-ended levels, and a focus on tactical realism, Sniper Elite 4 offers hundreds of hours of 
+      intense sniping gameplay.
+    </p>
+  </div>
+
+  <script>
+    // Check where user came from and set back button accordingly
+    document.addEventListener('DOMContentLoaded', function() {
+      const backButton = document.getElementById('backButton');
+      const referrer = document.referrer;
+      
+      if (referrer.includes('landing.html')) {
+        backButton.href = 'landing.html';
+        backButton.textContent = 'Back';
+      } else if (referrer.includes('products.html')) {
+        backButton.href = 'products.html';
+        backButton.textContent = 'Back to Store';
+      } else {
+        // Default to products page if referrer is unknown
+        backButton.href = 'products.html';
+      }
+    });
+
+    // Check if user is logged in
+    function checkLoginStatus() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) {
+        window.location.href = 'login.html';
+        return false;
+      }
+      return true;
+    }
+
+    document.getElementById('checkout-button').addEventListener('click', function() {
+      if (checkLoginStatus()) {
+        window.location.href = 'pay-sniper-elite-4.html';
+      }
+    });
+
+    document.querySelectorAll('.screenshots img').forEach(img => {
+      img.addEventListener('click', function() {
+        alert('Opening full size screenshot: ' + this.alt);
+      });
+    });
+  </script>
+</body>
+</html>

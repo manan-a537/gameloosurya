@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gameloo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      transition: opacity 0.3s ease-out;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .logo {
+      width: 600px;
+      height: auto;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+    }
+
+    .button {
+      background-color: #000;
+      color: #fff;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: -10px;
+    }
+
+    .button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <img src="Gameloo.jpg" alt="Gameloo Logo" class="logo" />
+  <button class="button" onclick="goToNextPage()">let's go</button>
+  <a href="http://localhost:5000/auth/google">
+    <button>Sign in with Google</button>
+</a>
+
+  <script>
+    // Check if the user is signed in
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+    const userPicture = localStorage.getItem('userPicture');
+
+    if (isLoggedIn) {
+        // Update the UI to reflect the signed-in state
+        document.body.innerHTML = `
+            <div style="text-align: center;">
+                <h1>Welcome, ${userName}!</h1>
+                <p>Email: ${userEmail}</p>
+                <img src="${userPicture}" alt="Profile Picture" style="border-radius: 50%; width: 100px; height: 100px;" />
+                <br><br>
+                <button onclick="logout()">Logout</button>
+            </div>
+        `;
+    }
+
+    function logout() {
+        // Clear user data from localStorage
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPicture');
+        localStorage.removeItem('token');
+
+        // Reload the page to reset the UI
+        window.location.reload();
+    }
+
+    function goToNextPage() {
+      document.body.classList.add('fade-out');
+      
+      setTimeout(() => {
+        // Redirect to landing page
+        window.location.href = "landing.html";
+      }, 300);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Cart</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: white;
+      padding: 20px;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .cart-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .left {
+      flex: 1;
+      padding: 20px;
+    }
+    .right {
+      width: 350px;
+      background-color: #1c1c1c;
+      padding: 20px;
+      border-radius: 6px;
+    }
+    .game-details {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      justify-content: space-between;
+    }
+    .game-info {
+      display: flex;
+      align-items: center;
+    }
+    .game-info img {
+      width: 60px;
+      margin-right: 10px;
+    }
+    .game-details button {
+      background-color: #00c853;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .price-info div {
+      margin: 4px 0;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .place-order {
+      background: #00c853;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      font-size: 16px;
+    }
+    .place-order:hover {
+      background: #00e676;
+    }
+    .creator-code {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+    .summary {
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <div class="left">
+      <h2>YOUR CART</h2>
+      <div id="cartItems"></div>
+    </div>
+
+    <div class="right">
+      <h3>ORDER SUMMARY</h3>
+      <div class="summary">
+        <div id="orderSummary"></div>
+        <div class="price-info">
+          <div>Price: ₹<span id="price"></span></div>
+          <div>VAT included (18%): ₹<span id="vat"></span></div>
+          <div class="total">Total: ₹<span id="total"></span></div>
+        </div>
+        <button class="place-order">PLACE ORDER</button>
+        <div class="creator-code">
+          Need help? <a href="#">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gamePageMap = {
+      "GTA V": "game-gta.html",
+      "Watch Dogs 2": "game-watchdogs.html",
+      "The Last of Us Part II": "game-lastofus.html",
+      "Hogwarts Legacy": "game-hogwarts.html",
+      "God of War Ragnarok": "game-godofwar.html",
+      "Assassin's Creed Shadows": "game-acshadows.html"
+    };
+
+    function loadCartItems() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById("cartItems");
+      const orderSummaryContainer = document.getElementById("orderSummary");
+      let totalPrice = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        orderSummaryContainer.innerHTML = "<p>No items in your cart.</p>";
+        return;
+      }
+
+      cart.forEach(item => {
+        const gamePrice = 70;
+        totalPrice += gamePrice;
+
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.className = 'game-details';
+
+        const gameLink = gamePageMap[item] || "#";
+
+        cartItemDiv.innerHTML = `
+          <div class="game-info">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" alt="${item}">
+            <div>
+              <strong>${item}</strong><br>
+              Rockstar Games<br>
+              ₹${gamePrice}
+            </div>
+          </div>
+          <button onclick="location.href='${gameLink}'">Buy Now</button>
+        `;
+
+        cartItemsContainer.appendChild(cartItemDiv);
+      });
+
+      const vat = totalPrice * 0.18;
+      const finalTotal = totalPrice + vat;
+
+      document.getElementById("price").textContent = totalPrice.toFixed(2);
+      document.getElementById("vat").textContent = vat.toFixed(2);
+      document.getElementById("total").textContent = finalTotal.toFixed(2);
+
+      orderSummaryContainer.innerHTML = `<div><strong>Items in Cart:</strong> ${cart.length}</div>`;
+    }
+
+    loadCartItems();
+
+    document.querySelector(".place-order").addEventListener("click", function () {
+      window.location.href = "payment.html";
+    });
+  </script>
+</body>
+</html>

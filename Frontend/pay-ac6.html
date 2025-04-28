@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout for Armored Core VI: Fires of Rubicon | Gameloo Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #000000;
+      color: #333;
+      padding: 20px;
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: black;
+      padding: 10px 30px;
+      border: 2px solid white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .back-button:hover {
+      background-color: #1a1a1a;
+      text-decoration: none;
+    }
+    .checkout-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .payment-section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .payment-option:hover {
+      border-color: #0074e4;
+      background-color: #f8faff;
+    }
+    .payment-option.selected {
+      border-color: #0074e4;
+      background-color: #f0f5ff;
+    }
+    .payment-icon {
+      width: 40px;
+      height: 25px;
+      margin-right: 15px;
+      object-fit: contain;
+    }
+    .payment-details {
+      flex-grow: 1;
+    }
+    .payment-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+    .payment-description {
+      font-size: 14px;
+      color: #666;
+    }
+    .order-summary {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .order-item-title {
+      font-weight: bold;
+    }
+    .order-item-value {
+      text-align: right;
+    }
+    .divider {
+      height: 1px;
+      background-color: #eee;
+      margin: 15px 0;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .rewards-notice {
+      font-size: 14px;
+      color: #666;
+      margin: 15px 0;
+    }
+    .creator-code {
+      margin: 15px 0;
+    }
+    .creator-code input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+    .checkbox-container {
+      margin: 15px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .checkbox-container input {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .help-link {
+      display: block;
+      margin: 15px 0;
+      color: #0074e4;
+      text-decoration: none;
+    }
+    .help-link:hover {
+      text-decoration: underline;
+    }
+    .legal-text {
+      font-size: 12px;
+      color: #666;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #0074e4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .place-order-btn:hover {
+      background-color: #005bb5;
+    }
+    .game-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
+    .payment-form {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background-color: white;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    .payment-form.show {
+      right: 0;
+    }
+    .payment-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .payment-form-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .close-payment-form {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    .submit-payment {
+      width: 100%;
+      padding: 12px;
+      background-color: #0074e4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .submit-payment:hover {
+      background-color: #005bb5;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .payment-form {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="game-ac6.html">BACK</a>
+  
+  <div class="checkout-container">
+    <h1>CHECKOUT</h1>
+    
+    <div class="payment-section">
+      <h2 class="section-title">OTHER PAYMENT METHODS</h2>
+      <div class="payment-option selected" id="creditCardOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" class="payment-icon" alt="Credit Card">
+        <div class="payment-details">
+          <div class="payment-title">Credit Card / Debit Card</div>
+          <div class="payment-description">Visa, Mastercard, American Express</div>
+        </div>
+      </div>
+      <div class="payment-option" id="paypalOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" class="payment-icon" alt="PayPal">
+        <div class="payment-details">
+          <div class="payment-title">PayPal</div>
+          <div class="payment-description">Pay with your PayPal account</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="order-summary">
+      <h2 class="section-title">ORDER SUMMARY</h2>
+      <div class="order-item">
+        <div style="display: flex; align-items: center;">
+          <img src="AC VI.jpg" class="game-image" alt="Armored Core VI: Fires of Rubicon">
+          <div>
+            <div class="order-item-title">Armored Core VI: Fires of Rubicon</div>
+            <div>FromSoftware</div>
+          </div>
+        </div>
+        <div class="order-item-value">₹290</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item">
+        <div class="order-item-title">Price</div>
+        <div class="order-item-value">₹290</div>
+      </div>
+      <div class="order-item">
+        <div class="order-item-title">VAT included (18%)</div>
+        <div class="order-item-value">₹10</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item total">
+        <div class="order-item-title">Total</div>
+        <div class="order-item-value">₹300</div>
+      </div>
+      
+      <div class="rewards-notice">
+        Earn 15000 Spore Pointsin Game by Gameloo Rewards with this purchase.
+      </div>
+    </div>
+    
+    <div class="checkbox-container">
+      <input type="checkbox" id="shareEmail">
+      <label for="shareEmail">Click here to agree to share your email with FromSoftware. FromSoftware will use your email address for marketing and otherwise in accordance with its privacy policy, so we encourage you to read it.</label>
+    </div>
+    
+    <div class="legal-text">
+      You are purchasing a digital license for this product. For full terms, see purchases policy.
+    </div>
+    
+    <div class="legal-text">
+      By clicking "Place Order" below, I represent that I am over 18 and an authorized user of this payment method, I agree to the End User License Agreement.
+    </div>
+    
+    <button class="place-order-btn" onclick="placeOrder()">PLACE ORDER</button>
+  </div>
+
+  <!-- Payment Form Overlay -->
+  <div class="overlay" id="paymentOverlay"></div>
+
+  <!-- Credit Card Payment Form -->
+  <div class="payment-form" id="creditCardForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Credit/Debit Card Details</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <form id="creditCardDetails">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+      </div>
+      <div class="form-group">
+        <label for="cardName">Name on Card</label>
+        <input type="text" id="cardName" placeholder="John Doe" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" placeholder="123" required>
+        </div>
+      </div>
+      <button type="submit" class="submit-payment">Pay ₹300</button>
+    </form>
+  </div>
+
+  <!-- PayPal Payment Form -->
+  <div class="payment-form" id="paypalForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">PayPal Payment</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <div style="text-align: center; margin: 30px 0;">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" style="width: 150px; margin-bottom: 20px;" alt="PayPal">
+      <p>You will be redirected to PayPal to complete your payment</p>
+      <p>Total Amount: ₹4,999</p>
+    </div>
+    <button class="submit-payment" onclick="processPayPalPayment()">Continue to PayPal</button>
+  </div>
+
+  <script>
+    // Payment method selection
+    document.getElementById('creditCardOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('paypalOption').classList.remove('selected');
+      showPaymentForm('creditCardForm');
+    });
+    
+    document.getElementById('paypalOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('creditCardOption').classList.remove('selected');
+      showPaymentForm('paypalForm');
+    });
+    
+    // Show payment form
+    function showPaymentForm(formId) {
+      document.getElementById('paymentOverlay').classList.add('show');
+      document.getElementById(formId).classList.add('show');
+    }
+    
+    // Close payment form
+    function closePaymentForm() {
+      document.getElementById('paymentOverlay').classList.remove('show');
+      document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.remove('show');
+      });
+    }
+    
+    // Process credit card payment
+    document.getElementById('creditCardDetails').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Payment processed successfully! Redirecting to download page...');
+      closePaymentForm();
+      // Redirect to Armored Core VI download links page
+      setTimeout(function() {
+        window.location.href = 'armored-core6-download-links.html';
+      }, 1500);
+    });
+    
+    // Process PayPal payment
+    function processPayPalPayment() {
+      alert('Payment processed successfully! Redirecting to download page...');
+      closePaymentForm();
+      // Redirect to Armored Core VI download links page
+      setTimeout(function() {
+        window.location.href = 'armored-core6-download-links.html';
+      }, 1500);
+    }
+    
+    // Place order function
+    function placeOrder() {
+      const paymentMethod = document.querySelector('.payment-option.selected .payment-title').textContent;
+      if (paymentMethod.includes('Credit Card') || paymentMethod.includes('PayPal')) {
+        showPaymentForm(paymentMethod.includes('Credit Card') ? 'creditCardForm' : 'paypalForm');
+      } else {
+        alert('Order placed successfully! Redirecting to download page...');
+        // Redirect to Armored Core VI download links page
+        setTimeout(function() {
+          window.location.href = 'armored-core6-download-links.html';
+        }, 1500);
+      }
+    }
+    
+    // Close payment form when clicking overlay
+    document.getElementById('paymentOverlay').addEventListener('click', closePaymentForm);
+  </script>
+</body>
+</html>

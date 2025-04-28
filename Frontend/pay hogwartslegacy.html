@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Hogwarts Legacy | Gameloo Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 20px;
+      background-image: url('https://images.ctfassets.net/usf1vwtuqyxm/3SQ3X2km8wkQIsQWa02yOY/8801d7058a3a99f3b6d02a9b2d68d3f8/Hogwarts-Legacy-PlayStation-5.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid #d4af37;
+    }
+    .back-button:hover {
+      background-color: rgba(212, 175, 55, 0.2);
+    }
+    .checkout-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      border: 1px solid #d4af37;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #d4af37;
+      text-align: center;
+      font-family: 'Harry Potter', serif;
+    }
+    .payment-section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #d4af37;
+      border-bottom: 1px solid #d4af37;
+      padding-bottom: 10px;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #d4af37;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .payment-option:hover {
+      border-color: #fff;
+      background-color: rgba(212, 175, 55, 0.2);
+    }
+    .payment-option.selected {
+      border-color: #fff;
+      background-color: rgba(212, 175, 55, 0.3);
+    }
+    .payment-icon {
+      width: 40px;
+      height: 25px;
+      margin-right: 15px;
+      object-fit: contain;
+    }
+    .payment-details {
+      flex-grow: 1;
+    }
+    .payment-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #fff;
+    }
+    .payment-description {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .order-summary {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+      border: 1px solid #d4af37;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .order-item-title {
+      font-weight: bold;
+      color: #d4af37;
+    }
+    .order-item-value {
+      text-align: right;
+      color: #fff;
+    }
+    .divider {
+      height: 1px;
+      background-color: #d4af37;
+      margin: 15px 0;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .rewards-notice {
+      font-size: 14px;
+      color: #ccc;
+      margin: 15px 0;
+    }
+    .creator-code {
+      margin: 15px 0;
+    }
+    .creator-code label {
+      color: #d4af37;
+    }
+    .creator-code input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d4af37;
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+    }
+    .checkbox-container {
+      margin: 15px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      color: #ccc;
+    }
+    .checkbox-container input {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .help-link {
+      display: block;
+      margin: 15px 0;
+      color: #d4af37;
+      text-decoration: none;
+    }
+    .help-link:hover {
+      text-decoration: underline;
+    }
+    .legal-text {
+      font-size: 12px;
+      color: #ccc;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #d4af37;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-family: 'Harry Potter', serif;
+      letter-spacing: 1px;
+    }
+    .place-order-btn:hover {
+      background-color: #c9a227;
+    }
+    .game-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 15px;
+      border: 1px solid #d4af37;
+    }
+    .payment-form {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      border-left: 1px solid #d4af37;
+      color: #fff;
+    }
+    .payment-form.show {
+      right: 0;
+    }
+    .payment-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .payment-form-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #d4af37;
+    }
+    .close-payment-form {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #d4af37;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #d4af37;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d4af37;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    .submit-payment {
+      width: 100%;
+      padding: 12px;
+      background-color: #d4af37;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      font-family: 'Harry Potter', serif;
+    }
+    .submit-payment:hover {
+      background-color: #c9a227;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .payment-form {
+        max-width: 100%;
+      }
+    }
+    @font-face {
+      font-family: 'Harry Potter';
+      src: url('https://www.dafontfree.io/data/10/a/4488/HarryP-MVZ6w.ttf') format('truetype');
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="game-hogwarts.html">← Back to Hogwarts</a>
+  
+  <div class="checkout-container">
+    <h1>MAGICAL CHECKOUT</h1>
+    
+    <div class="payment-section">
+      <h2 class="section-title">GAMELOO REWARDS</h2>
+      <div class="payment-option">
+        <div class="payment-details">
+          <div class="payment-title">Wizard's Gold</div>
+          <div class="payment-description">0 Galleons</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-section">
+      <h2 class="section-title">PAYMENT CHARMS</h2>
+      <div class="payment-option selected" id="creditCardOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" class="payment-icon" alt="Credit Card">
+        <div class="payment-details">
+          <div class="payment-title">Wizard's Card</div>
+          <div class="payment-description">Visa, Mastercard, Gringotts Express</div>
+        </div>
+      </div>
+      <div class="payment-option" id="paypalOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" class="payment-icon" alt="PayPal">
+        <div class="payment-details">
+          <div class="payment-title">Owl Post</div>
+          <div class="payment-description">Send payment by owl</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="order-summary">
+      <h2 class="section-title">POTION INGREDIENTS</h2>
+      <div class="order-item">
+        <div style="display: flex; align-items: center;">
+          <img src="HogwartsLegacy.webp" class="game-image" alt="Hogwarts Legacy">
+          <div>
+            <div class="order-item-title">Hogwarts Legacy</div>
+            <div>Portkey Games</div>
+          </div>
+        </div>
+        <div class="order-item-value">₹200</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item">
+        <div class="order-item-title">Price</div>
+        <div class="order-item-value">₹280</div>
+      </div>
+      <div class="order-item">
+        <div class="order-item-title">Ministry Tax (18%)</div>
+        <div class="order-item-value">₹20</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item total">
+        <div class="order-item-title">Total</div>
+        <div class="order-item-value">₹300</div>
+      </div>
+      
+      <div class="rewards-notice">
+        Earn 250 Galleons in Wizard's Gold with this purchase.
+      </div>
+    </div>
+    
+    <div class="creator-code">
+      <label for="creatorCode">Enter House Code (Gryffindor, Hufflepuff, etc.)</label>
+      <input type="text" id="creatorCode" placeholder="Optional">
+    </div>
+    
+    <div class="checkbox-container">
+      <input type="checkbox" id="shareEmail">
+      <label for="shareEmail">I solemnly swear that I agree to share my owl post address with Hogwarts for magical communications.</label>
+    </div>
+    
+    <a href="#" class="help-link">Need Help? Send a Patronus</a>
+    
+    <div class="legal-text">
+      This purchase is protected by the International Statute of Wizarding Secrecy. Misuse of magic is punishable by the Ministry.
+    </div>
+    
+    <div class="legal-text">
+      By clicking "Cast Order Spell", I confirm I am of wizarding age and authorized to use this payment method. I agree to the Hogwarts Terms of Witchcraft and Wizardry.
+    </div>
+    
+    <button class="place-order-btn" onclick="placeOrder()">CAST ORDER SPELL</button>
+  </div>
+
+  <!-- Payment Form Overlay -->
+  <div class="overlay" id="paymentOverlay"></div>
+
+  <!-- Credit Card Payment Form -->
+  <div class="payment-form" id="creditCardForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Wizard's Card Details</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <form id="creditCardDetails">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+      </div>
+      <div class="form-group">
+        <label for="cardName">Name on Card</label>
+        <input type="text" id="cardName" placeholder="Albus Dumbledore" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">Magical Code</label>
+          <input type="text" id="cvv" placeholder="123" required>
+        </div>
+      </div>
+      <button type="submit" class="submit-payment">Pay ₹300</button>
+    </form>
+  </div>
+
+  <!-- PayPal Payment Form -->
+  <div class="payment-form" id="paypalForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Owl Post Payment</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <div style="text-align: center; margin: 30px 0;">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" style="width: 150px; margin-bottom: 20px;" alt="PayPal">
+      <p>An owl will be dispatched to collect your payment</p>
+      <p>Total Amount: ₹200</p>
+    </div>
+    <button class="submit-payment" onclick="processPayPalPayment()">Send Owl</button>
+  </div>
+
+  <script>
+    // Payment method selection
+    document.getElementById('creditCardOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('paypalOption').classList.remove('selected');
+      showPaymentForm('creditCardForm');
+    });
+    
+    document.getElementById('paypalOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('creditCardOption').classList.remove('selected');
+      showPaymentForm('paypalForm');
+    });
+    
+    // Show payment form
+    function showPaymentForm(formId) {
+      document.getElementById('paymentOverlay').classList.add('show');
+      document.getElementById(formId).classList.add('show');
+    }
+    
+    // Close payment form
+    function closePaymentForm() {
+      document.getElementById('paymentOverlay').classList.remove('show');
+      document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.remove('show');
+      });
+    }
+    
+    // Process credit card payment
+    document.getElementById('creditCardDetails').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Payment spell successful! Your game will be delivered by owl post.');
+      closePaymentForm();
+      // In a real implementation, you would process the payment here
+      // window.location.href = 'order-confirmation.html';
+    });
+    
+    // Process PayPal payment
+    function processPayPalPayment() {
+      alert('Dispatching owl... Please have your payment ready.');
+      closePaymentForm();
+      // In a real implementation, you would redirect to PayPal
+      // window.location.href = 'paypal-payment-processor.html';
+    }
+    
+    // Place order function
+    function placeOrder() {
+      const paymentMethod = document.querySelector('.payment-option.selected .payment-title').textContent;
+      if (paymentMethod.includes('Wizard') || paymentMethod.includes('Owl')) {
+        showPaymentForm(paymentMethod.includes('Wizard') ? 'creditCardForm' : 'paypalForm');
+      } else {
+        alert(`Order spell cast successfully using ${paymentMethod}! Expect your game by owl post.`);
+      }
+    }
+    
+    // Close payment form when clicking overlay
+    document.getElementById('paymentOverlay').addEventListener('click', closePaymentForm);
+    
+    // Add Harry Potter theme when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+      audio.volume = 0.3;
+      audio.loop = true;
+      // Uncomment to play music (might be annoying for users)
+      // audio.play();
+    });
+  </script>
+</body>
+</html>

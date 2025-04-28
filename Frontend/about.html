@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Gameloo - Your Ultimate Gaming Destination</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body {
+            background-color: #000000;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('Blueflame.gif') center/cover no-repeat;
+            opacity: 0.55;
+            z-index: -1;
+        }
+
+        header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu a:hover {
+            border-color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .about-section {
+            padding: 120px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .about-content {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border: 2px solid #FFFFFF;
+            margin-bottom: 40px;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .mission-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .mission-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border: 2px solid #FFFFFF;
+            text-align: center;
+        }
+
+        .mission-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #00b4ff;
+        }
+
+        .mission-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .back-button {
+            display: inline-block;
+            text-decoration: none;
+            color: #FFFFFF;
+            padding: 8px 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 20px;
+            background: transparent;
+        }
+
+        .back-button:hover {
+            border-color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav-menu">
+            <a href="Landing.html">Home</a>
+            <a href="products.html">Store</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <div class="about-section">
+        <a href="Landing.html" class="back-button">Back to Home</a>
+        <h1 class="section-title">About Gameloo</h1>
+        
+        <div class="about-content">
+            <p class="about-text">
+                Welcome to Gameloo, your ultimate destination for gaming excellence. Founded with a passion for gaming and a commitment to quality, we strive to provide the best gaming experience for our community.
+            </p>
+            
+            <p class="about-text">
+                At Gameloo, we believe that gaming is more than just entertainment - it's a way of life. Our platform brings together gamers from around the world, offering a curated selection of the finest games, exclusive deals, and a vibrant community.
+            </p>
+        </div>
+
+        <div class="mission-section">
+            <div class="mission-card">
+                <h2 class="mission-title">Our Mission</h2>
+                <p class="mission-text">
+                    To revolutionize the gaming industry by providing a seamless, secure, and enjoyable platform for gamers worldwide.
+                </p>
+            </div>
+            
+            <div class="mission-card">
+                <h2 class="mission-title">Our Vision</h2>
+                <p class="mission-text">
+                    To become the leading global gaming platform, setting new standards in gaming distribution and community engagement.
+                </p>
+            </div>
+            
+            <div class="mission-card">
+                <h2 class="mission-title">Our Values</h2>
+                <p class="mission-text">
+                    Quality, Innovation, Community, and Passion - these core values drive everything we do at Gameloo.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

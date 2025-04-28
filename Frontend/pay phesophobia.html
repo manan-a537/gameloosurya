@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Phasmophobia | Gameloo Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+    body {
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+      padding: 20px;
+      background-image: url('https://images.alphacoders.com/112/1122637.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #ff5555;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 8px 15px;
+      border-radius: 4px;
+      border: 1px solid #ff5555;
+    }
+    .back-button:hover {
+      background-color: rgba(255, 85, 85, 0.2);
+    }
+    .checkout-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(10, 10, 10, 0.9);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(255, 85, 85, 0.3);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      color: #e0e0e0;
+      border: 1px solid #ff5555;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #ff5555;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+      letter-spacing: 2px;
+    }
+    .payment-section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #ff5555;
+      border-bottom: 1px solid #ff5555;
+      padding-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: rgba(30, 30, 30, 0.7);
+    }
+    .payment-option:hover {
+      border-color: #ff5555;
+      background-color: rgba(255, 85, 85, 0.1);
+    }
+    .payment-option.selected {
+      border-color: #ff5555;
+      background-color: rgba(255, 85, 85, 0.2);
+      box-shadow: 0 0 10px rgba(255, 85, 85, 0.3);
+    }
+    .payment-icon {
+      width: 40px;
+      height: 25px;
+      margin-right: 15px;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(2);
+    }
+    .payment-details {
+      flex-grow: 1;
+    }
+    .payment-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #fff;
+    }
+    .payment-description {
+      font-size: 14px;
+      color: #aaa;
+    }
+    .order-summary {
+      background-color: rgba(30, 30, 30, 0.7);
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 30px;
+      border: 1px solid #ff5555;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .order-item-title {
+      font-weight: bold;
+      color: #ff5555;
+    }
+    .order-item-value {
+      text-align: right;
+      color: #fff;
+    }
+    .divider {
+      height: 1px;
+      background-color: #ff5555;
+      margin: 15px 0;
+      opacity: 0.5;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .rewards-notice {
+      font-size: 14px;
+      color: #aaa;
+      margin: 15px 0;
+    }
+    .creator-code {
+      margin: 15px 0;
+    }
+    .creator-code label {
+      color: #ff5555;
+    }
+    .creator-code input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      margin-top: 5px;
+      background-color: rgba(30, 30, 30, 0.7);
+      color: #fff;
+    }
+    .creator-code input:focus {
+      border-color: #ff5555;
+      outline: none;
+    }
+    .checkbox-container {
+      margin: 15px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      color: #aaa;
+    }
+    .checkbox-container input {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .help-link {
+      display: block;
+      margin: 15px 0;
+      color: #ff5555;
+      text-decoration: none;
+    }
+    .help-link:hover {
+      text-decoration: underline;
+    }
+    .legal-text {
+      font-size: 12px;
+      color: #777;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff5555;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .place-order-btn:hover {
+      background-color: #ff3333;
+    }
+    .game-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+      border: 1px solid #ff5555;
+    }
+    .payment-form {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background-color: rgba(10, 10, 10, 0.95);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      border-left: 1px solid #ff5555;
+      color: #e0e0e0;
+    }
+    .payment-form.show {
+      right: 0;
+    }
+    .payment-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .payment-form-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff5555;
+    }
+    .close-payment-form {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #ff5555;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #ff5555;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 4px;
+      background-color: rgba(30, 30, 30, 0.7);
+      color: #fff;
+    }
+    .form-group input:focus {
+      border-color: #ff5555;
+      outline: none;
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    .submit-payment {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff5555;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      text-transform: uppercase;
+    }
+    .submit-payment:hover {
+      background-color: #ff3333;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .payment-form {
+        max-width: 100%;
+      }
+    }
+    /* Flickering effect */
+    @keyframes flicker {
+      0% { opacity: 0.8; }
+      5% { opacity: 0.5; }
+      10% { opacity: 0.6; }
+      15% { opacity: 0.9; }
+      25% { opacity: 0.5; }
+      30% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+    .flicker {
+      animation: flicker 0.5s infinite;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="game-phasmophobia.html">← Back to Investigation</a>
+  
+  <div class="checkout-container">
+    <h1 id="title">CHECKOUT - EVIDENCE COLLECTED</h1>
+    
+    <div class="payment-section">
+      <h2 class="section-title">PARANORMAL REWARDS</h2>
+      <div class="payment-option">
+        <div class="payment-details">
+          <div class="payment-title">Spirit Points</div>
+          <div class="payment-description">0 EMF</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-section">
+      <h2 class="section-title">PAYMENT METHODS</h2>
+      <div class="payment-option selected" id="creditCardOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" class="payment-icon" alt="Credit Card">
+        <div class="payment-details">
+          <div class="payment-title">Ghost Card</div>
+          <div class="payment-description">Visa, Mastercard, Spirit Express</div>
+        </div>
+      </div>
+      <div class="payment-option" id="paypalOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" class="payment-icon" alt="PayPal">
+        <div class="payment-details">
+          <div class="payment-title">Ouija Payment</div>
+          <div class="payment-description">Contact spirits for payment</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="order-summary">
+      <h2 class="section-title">EVIDENCE SUMMARY</h2>
+      <div class="order-item">
+        <div style="display: flex; align-items: center;">
+          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/739630/header.jpg" class="game-image" alt="Phasmophobia">
+          <div>
+            <div class="order-item-title">Phasmophobia</div>
+            <div>Kinetic Games</div>
+          </div>
+        </div>
+        <div class="order-item-value">₹150</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item">
+        <div class="order-item-title">Base Price</div>
+        <div class="order-item-value">₹150</div>
+      </div>
+      <div class="order-item">
+        <div class="order-item-title">Paranormal Tax (18%)</div>
+        <div class="order-item-value">₹50</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item total">
+        <div class="order-item-title">Total</div>
+        <div class="order-item-value">₹200</div>
+      </div>
+      
+      <div class="rewards-notice">
+        Earn 50 EMF in Spirit Points with this purchase.
+      </div>
+    </div>
+    
+    <div class="creator-code">
+      <label for="creatorCode">Enter Ghost Type (Optional)</label>
+      <input type="text" id="creatorCode" placeholder="Spirit, Phantom, Demon...">
+    </div>
+    
+    <div class="checkbox-container">
+      <input type="checkbox" id="shareEmail">
+      <label for="shareEmail">I agree to share my location with paranormal investigators for future ghost hunts.</label>
+    </div>
+    
+    <a href="#" class="help-link">Need Help? Use Spirit Box</a>
+    
+    <div class="legal-text">
+      Warning: Purchasing this game may result in paranormal activity in your home. Kinetic Games is not responsible for any ghostly encounters.
+    </div>
+    
+    <div class="legal-text">
+      By clicking "Complete Investigation", I confirm I'm not currently possessed and authorized to use this payment method. I agree to the Paranormal Terms of Service.
+    </div>
+    
+    <button class="place-order-btn" id="orderBtn" onclick="placeOrder()">COMPLETE INVESTIGATION</button>
+  </div>
+
+  <!-- Payment Form Overlay -->
+  <div class="overlay" id="paymentOverlay"></div>
+
+  <!-- Credit Card Payment Form -->
+  <div class="payment-form" id="creditCardForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Ghost Card Details</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <form id="creditCardDetails">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+      </div>
+      <div class="form-group">
+        <label for="cardName">Name on Card</label>
+        <input type="text" id="cardName" placeholder="Ghost Hunter" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">Spirit Code</label>
+          <input type="text" id="cvv" placeholder="123" required>
+        </div>
+      </div>
+      <button type="submit" class="submit-payment">Pay ₹200</button>
+    </form>
+  </div>
+
+  <!-- PayPal Payment Form -->
+  <div class="payment-form" id="paypalForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Ouija Payment</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <div style="text-align: center; margin: 30px 0;">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" style="width: 150px; margin-bottom: 20px; filter: grayscale(100%) brightness(2);" alt="PayPal">
+      <p>The spirits will contact you for payment</p>
+      <p>Total Amount: ₹200</p>
+    </div>
+    <button class="submit-payment" onclick="processPayPalPayment()">Contact Spirits</button>
+  </div>
+
+  <!-- Ghost Writing -->
+  <div id="ghostWriting" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.9); padding: 20px; border: 1px solid #ff5555; z-index: 1001; color: #ff5555; text-align: center;">
+    <h2 style="margin-bottom: 20px;">GHOST ACTIVITY DETECTED</h2>
+    <p id="ghostMessage" style="margin-bottom: 20px;"></p>
+    <button onclick="hideGhostWriting()" style="padding: 10px 20px; background-color: #ff5555; color: black; border: none; cursor: pointer;">CLOSE</button>
+  </div>
+
+  <script>
+    // Payment method selection
+    document.getElementById('creditCardOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('paypalOption').classList.remove('selected');
+      showPaymentForm('creditCardForm');
+    });
+    
+    document.getElementById('paypalOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('creditCardOption').classList.remove('selected');
+      showPaymentForm('paypalForm');
+    });
+    
+    // Show payment form
+    function showPaymentForm(formId) {
+      document.getElementById('paymentOverlay').classList.add('show');
+      document.getElementById(formId).classList.add('show');
+    }
+    
+    // Close payment form
+    function closePaymentForm() {
+      document.getElementById('paymentOverlay').classList.remove('show');
+      document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.remove('show');
+      });
+    }
+    
+    // Process credit card payment
+    document.getElementById('creditCardDetails').addEventListener('submit', function(e) {
+      e.preventDefault();
+      showGhostMessage("Payment successful... but something is watching you.");
+      closePaymentForm();
+    });
+    
+    // Process PayPal payment
+    function processPayPalPayment() {
+      showGhostMessage("The spirits have accepted your offer... check your bank account carefully.");
+      closePaymentForm();
+    }
+    
+    // Place order function
+    function placeOrder() {
+      const paymentMethod = document.querySelector('.payment-option.selected .payment-title').textContent;
+      if (paymentMethod.includes('Ghost') || paymentMethod.includes('Ouija')) {
+        showPaymentForm(paymentMethod.includes('Ghost') ? 'creditCardForm' : 'paypalForm');
+      } else {
+        showGhostMessage("Investigation complete... but the ghost followed you home.");
+      }
+    }
+    
+    // Close payment form when clicking overlay
+    document.getElementById('paymentOverlay').addEventListener('click', closePaymentForm);
+    
+    // Ghost writing effect
+    function showGhostMessage(message) {
+      const ghostWriting = document.getElementById('ghostWriting');
+      const ghostMessage = document.getElementById('ghostMessage');
+      ghostMessage.textContent = message;
+      ghostWriting.classList.remove('hidden');
+      document.getElementById('paymentOverlay').classList.add('show');
+      
+      // Random flicker effect
+      const title = document.getElementById('title');
+      title.classList.add('flicker');
+      setTimeout(() => title.classList.remove('flicker'), 1000);
+    }
+    
+    function hideGhostWriting() {
+      document.getElementById('ghostWriting').classList.add('hidden');
+      document.getElementById('paymentOverlay').classList.remove('show');
+    }
+    
+    // Random ghostly effects
+    setInterval(() => {
+      if (Math.random() > 0.95) {
+        const elements = document.querySelectorAll('.payment-option, .order-summary, .checkout-container');
+        const randomElement = elements[Math.floor(Math.random() * elements.length)];
+        randomElement.style.boxShadow = '0 0 15px rgba(255, 85, 85, 0.5)';
+        setTimeout(() => {
+          randomElement.style.boxShadow = '';
+        }, 500);
+      }
+    }, 5000);
+    
+    // Ghost typing effect on input
+    const ghostInput = document.getElementById('creatorCode');
+    ghostInput.addEventListener('focus', function() {
+      if (this.value === '') {
+        const ghostWords = ["Spirit", "Demon", "Phantom", "Wraith", "Banshee", "Jinn"];
+        let i = 0;
+        const typing = setInterval(() => {
+          this.value = ghostWords[Math.floor(Math.random() * ghostWords.length)];
+          i++;
+          if (i > 3) clearInterval(typing);
+        }, 200);
+      }
+    });
+  </script>
+</body>
+</html>

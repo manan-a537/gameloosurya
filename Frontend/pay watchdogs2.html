@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Watch Dogs 2 | Gameloo Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', monospace;
+    }
+    body {
+      background-color: #0a0a12;
+      color: #00ff41;
+      padding: 20px;
+      background-image: url('https://images.alphacoders.com/750/750353.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #00ff41;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: rgba(10, 10, 18, 0.7);
+      padding: 8px 15px;
+      border-radius: 4px;
+      border: 1px solid #00ff41;
+    }
+    .back-button:hover {
+      background-color: rgba(0, 255, 65, 0.2);
+      text-shadow: 0 0 5px #00ff41;
+    }
+    .checkout-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(10, 10, 18, 0.9);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      color: #00ff41;
+      border: 1px solid #00ff41;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #00ff41;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      letter-spacing: 2px;
+    }
+    .payment-section {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #00ff41;
+      border-bottom: 1px solid #00ff41;
+      padding-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #003b00;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background-color: rgba(0, 30, 0, 0.5);
+    }
+    .payment-option:hover {
+      border-color: #00ff41;
+      background-color: rgba(0, 255, 65, 0.1);
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    }
+    .payment-option.selected {
+      border-color: #00ff41;
+      background-color: rgba(0, 255, 65, 0.2);
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+    }
+    .payment-icon {
+      width: 40px;
+      height: 25px;
+      margin-right: 15px;
+      object-fit: contain;
+      filter: hue-rotate(90deg) brightness(1.5);
+    }
+    .payment-details {
+      flex-grow: 1;
+    }
+    .payment-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #00ff41;
+    }
+    .payment-description {
+      font-size: 14px;
+      color: #009933;
+    }
+    .order-summary {
+      background-color: rgba(0, 30, 0, 0.5);
+      border-radius: 4px;
+      padding: 20px;
+      margin-top: 30px;
+      border: 1px solid #00ff41;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .order-item-title {
+      font-weight: bold;
+      color: #00ff41;
+    }
+    .order-item-value {
+      text-align: right;
+      color: #00ff41;
+    }
+    .divider {
+      height: 1px;
+      background-color: #00ff41;
+      margin: 15px 0;
+      opacity: 0.3;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .rewards-notice {
+      font-size: 14px;
+      color: #009933;
+      margin: 15px 0;
+    }
+    .creator-code {
+      margin: 15px 0;
+    }
+    .creator-code label {
+      color: #00ff41;
+    }
+    .creator-code input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #003b00;
+      border-radius: 4px;
+      margin-top: 5px;
+      background-color: rgba(0, 30, 0, 0.5);
+      color: #00ff41;
+    }
+    .creator-code input:focus {
+      border-color: #00ff41;
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    }
+    .checkbox-container {
+      margin: 15px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      color: #009933;
+    }
+    .checkbox-container input {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .help-link {
+      display: block;
+      margin: 15px 0;
+      color: #00ff41;
+      text-decoration: none;
+    }
+    .help-link:hover {
+      text-decoration: underline;
+      text-shadow: 0 0 5px #00ff41;
+    }
+    .legal-text {
+      font-size: 12px;
+      color: #007722;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #00ff41;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 1px;
+    }
+    .place-order-btn:hover {
+      background-color: #00cc33;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+    }
+    .game-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+      border: 1px solid #00ff41;
+    }
+    .payment-form {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background-color: rgba(10, 10, 18, 0.95);
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      border-left: 1px solid #00ff41;
+      color: #00ff41;
+    }
+    .payment-form.show {
+      right: 0;
+    }
+    .payment-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .payment-form-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #00ff41;
+    }
+    .close-payment-form {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #00ff41;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #00ff41;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #003b00;
+      border-radius: 4px;
+      background-color: rgba(0, 30, 0, 0.5);
+      color: #00ff41;
+    }
+    .form-group input:focus {
+      border-color: #00ff41;
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+    .submit-payment {
+      width: 100%;
+      padding: 12px;
+      background-color: #00ff41;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .submit-payment:hover {
+      background-color: #00cc33;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      display: none;
+    }
+    .overlay.show {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .payment-form {
+        max-width: 100%;
+      }
+    }
+    /* Hacking animation */
+    @keyframes hack {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
+    .hack-animate {
+      animation: hack 0.5s infinite;
+    }
+    /* Binary rain effect */
+    .binary-rain {
+      position: absolute;
+      color: rgba(0, 255, 65, 0.3);
+      font-size: 14px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="game-watchdogs.html">← Back to ctOS</a>
+  
+  <div class="checkout-container">
+    <h1>SYSTEM CHECKOUT</h1>
+    
+    <div class="payment-section">
+      <h2 class="section-title">DEDSEC REWARDS</h2>
+      <div class="payment-option">
+        <div class="payment-details">
+          <div class="payment-title">Bitcoin</div>
+          <div class="payment-description">0.00 BTC</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-section">
+      <h2 class="section-title">PAYMENT PROTOCOLS</h2>
+      <div class="payment-option selected" id="creditCardOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" class="payment-icon" alt="Credit Card">
+        <div class="payment-details">
+          <div class="payment-title">Hacker Card</div>
+          <div class="payment-description">Visa, Mastercard, ctOS Pay</div>
+        </div>
+      </div>
+      <div class="payment-option" id="paypalOption">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" class="payment-icon" alt="PayPal">
+        <div class="payment-details">
+          <div class="payment-title">Cryptocurrency</div>
+          <div class="payment-description">Pay with Bitcoin or Ethereum</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="order-summary">
+      <h2 class="section-title">TRANSACTION LOG</h2>
+      <div class="order-item">
+        <div style="display: flex; align-items: center;">
+          <img src="Watch Dogs 2.jpeg" class="game-image" alt="Watch Dogs 2">
+          <div>
+            <div class="order-item-title">Watch Dogs 2</div>
+            <div>Ubisoft Montreal</div>
+          </div>
+        </div>
+        <div class="order-item-value">₹170</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item">
+        <div class="order-item-title">Base Price</div>
+        <div class="order-item-value">₹170</div>
+      </div>
+      <div class="order-item">
+        <div class="order-item-title">ctOS Tax (18%)</div>
+        <div class="order-item-value">₹40</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="order-item total">
+        <div class="order-item-title">Total</div>
+        <div class="order-item-value">₹210</div>
+      </div>
+      
+      <div class="rewards-notice">
+        Earn 0.0005 BTC in DedSec Rewards with this purchase.
+      </div>
+    </div>
+    
+    <div class="creator-code">
+      <label for="creatorCode">Enter Hack Code (Optional)</label>
+      <input type="text" id="creatorCode" placeholder="e.g., 1337H4X">
+    </div>
+    
+    <div class="checkbox-container">
+      <input type="checkbox" id="shareEmail">
+      <label for="shareEmail">I agree to let DedSec add me to their mailing list. They promise not to spam... much.</label>
+    </div>
+    
+    <a href="#" class="help-link">Need Help? Contact Marcus</a>
+    
+    <div class="legal-text">
+      Warning: This purchase may be monitored by Blume Corporation. Use VPN for secure transaction.
+    </div>
+    
+    <div class="legal-text">
+      By clicking "Execute Hack", I confirm I'm not a Blume agent and authorized to use this payment method. I agree to the DedSec Terms of Service.
+    </div>
+    
+    <button class="place-order-btn" id="hackButton" onclick="placeOrder()">EXECUTE HACK</button>
+  </div>
+
+  <!-- Payment Form Overlay -->
+  <div class="overlay" id="paymentOverlay"></div>
+
+  <!-- Credit Card Payment Form -->
+  <div class="payment-form" id="creditCardForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Hacker Card Details</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <form id="creditCardDetails">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+      </div>
+      <div class="form-group">
+        <label for="cardName">Name on Card</label>
+        <input type="text" id="cardName" placeholder="Marcus Holloway" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" id="expiryDate" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+          <label for="cvv">Security Hack</label>
+          <input type="text" id="cvv" placeholder="123" required>
+        </div>
+      </div>
+      <button type="submit" class="submit-payment">Pay ₹210</button>
+    </form>
+  </div>
+
+  <!-- PayPal Payment Form -->
+  <div class="payment-form" id="paypalForm">
+    <div class="payment-form-header">
+      <div class="payment-form-title">Cryptocurrency Payment</div>
+      <button class="close-payment-form" onclick="closePaymentForm()">×</button>
+    </div>
+    <div style="text-align: center; margin: 30px 0;">
+      <img src="https://cdn-icons-png.flaticon.com/512/825/825454.png" style="width: 150px; margin-bottom: 20px; filter: hue-rotate(90deg) brightness(1.5);" alt="Bitcoin">
+      <p>You will be redirected to secure cryptocurrency payment</p>
+      <p>Total Amount: ₹210(0.00042 BTC)</p>
+    </div>
+    <button class="submit-payment" onclick="processPayPalPayment()">Initiate Transfer</button>
+  </div>
+
+  <script>
+    // Payment method selection
+    document.getElementById('creditCardOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('paypalOption').classList.remove('selected');
+      showPaymentForm('creditCardForm');
+    });
+    
+    document.getElementById('paypalOption').addEventListener('click', function() {
+      this.classList.add('selected');
+      document.getElementById('creditCardOption').classList.remove('selected');
+      showPaymentForm('paypalForm');
+    });
+    
+    // Show payment form
+    function showPaymentForm(formId) {
+      document.getElementById('paymentOverlay').classList.add('show');
+      document.getElementById(formId).classList.add('show');
+    }
+    
+    // Close payment form
+    function closePaymentForm() {
+      document.getElementById('paymentOverlay').classList.remove('show');
+      document.querySelectorAll('.payment-form').forEach(form => {
+        form.classList.remove('show');
+      });
+    }
+    
+    // Process credit card payment
+    document.getElementById('creditCardDetails').addEventListener('submit', function(e) {
+      e.preventDefault();
+      startHackAnimation();
+      setTimeout(function() {
+        alert('Payment secured! Your game is being downloaded through backdoor channels.');
+        closePaymentForm();
+      }, 2000);
+    });
+    
+    // Process PayPal payment
+    function processPayPalPayment() {
+      startHackAnimation();
+      setTimeout(function() {
+        alert('Cryptocurrency transfer initiated... Funds will be untraceable.');
+        closePaymentForm();
+      }, 2000);
+    }
+    
+    // Place order function
+    function placeOrder() {
+      const paymentMethod = document.querySelector('.payment-option.selected .payment-title').textContent;
+      if (paymentMethod.includes('Hacker') || paymentMethod.includes('Crypto')) {
+        showPaymentForm(paymentMethod.includes('Hacker') ? 'creditCardForm' : 'paypalForm');
+      } else {
+        startHackAnimation();
+        setTimeout(function() {
+          alert('Hack successful! Your game access has been granted.');
+        }, 2000);
+      }
+    }
+    
+    // Close payment form when clicking overlay
+    document.getElementById('paymentOverlay').addEventListener('click', closePaymentForm);
+    
+    // Hack animation
+    function startHackAnimation() {
+      const button = document.getElementById('hackButton');
+      button.classList.add('hack-animate');
+      button.textContent = "HACKING ctOS...";
+      setTimeout(function() {
+        button.classList.remove('hack-animate');
+        button.textContent = "EXECUTE HACK";
+      }, 2000);
+      
+      // Create binary rain effect
+      for (let i = 0; i < 50; i++) {
+        createBinary();
+      }
+    }
+    
+    // Binary rain effect
+    function createBinary() {
+      const binary = document.createElement('div');
+      binary.className = 'binary-rain';
+      binary.textContent = Math.random() > 0.5 ? '1' : '0';
+      binary.style.left = Math.random() * 100 + 'vw';
+      binary.style.top = '-20px';
+      document.body.appendChild(binary);
+      
+      let position = -20;
+      const fall = setInterval(function() {
+        position += 2;
+        binary.style.top = position + 'px';
+        
+        if (position > window.innerHeight) {
+          clearInterval(fall);
+          binary.remove();
+        }
+      }, 20);
+    }
+    
+    // Random hack effect
+    setInterval(function() {
+      if (Math.random() > 0.95) {
+        const elements = document.querySelectorAll('.payment-option, .order-summary, .checkout-container');
+        const randomElement = elements[Math.floor(Math.random() * elements.length)];
+        randomElement.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.5)';
+        setTimeout(function() {
+          randomElement.style.boxShadow = '';
+        }, 500);
+      }
+    }, 3000);
+  </script>
+</body>
+</html>

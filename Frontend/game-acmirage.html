@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assassin's Creed Mirage</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #333;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      margin-bottom: 20px;
+    }
+
+    .back-button:hover {
+      background-color: #666;
+    }
+
+    .game-detail-image {
+      width: 40%;
+      height: 700px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .rating {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+    
+    .rating .stars {
+      color: #FFD700;
+      margin-right: 10px;
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    .buy-now {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00BB00;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .buy-now:hover {
+      background-color: #009900;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 200, 83, 0.3);
+    }
+
+    .buy-now:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .screenshots img,
+    .pc-specs img {
+      width: 70%;
+      border-radius: 5%;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .screenshots img:hover {
+      transform: scale(1.02);
+    }
+
+    .about-game {
+      margin-top: 40px;
+    }
+
+    .about-game h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #b30000;
+    }
+
+    .about-game p {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .trailer-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .trailer-section h2 {
+      margin-bottom: 15px;
+      color: #b30000;
+    }
+
+    .trailer-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(179, 0, 0, 0.2);
+    }
+
+    .trailer-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .leave-reply {
+      margin-top: 40px;
+    }
+
+    .leave-reply h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .leave-reply textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      border: 1px solid #333;
+      resize: vertical;
+      font-size: 14px;
+      background-color: white;
+      color: black;
+      transition: border-color 0.3s;
+    }
+
+    .leave-reply textarea:focus {
+      border-color: #b30000;
+      outline: none;
+    }
+
+    .reply-inputs input {
+      padding: 8px;
+      border: 1px solid #333;
+      font-size: 14px;
+      margin-top: 10px;
+      width: 100%;
+      background-color: white;
+      color: black;
+      transition: border-color 0.3s;
+    }
+
+    .reply-inputs input:focus {
+      border-color: #b30000;
+      outline: none;
+    }
+
+    .post-reply-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .post-reply-btn:hover {
+      background-color: #8a0000;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <a href="products.html" class="back-button">← Back to Store</a>
+
+  <h1>Assassin's Creed Mirage</h1>
+  <img class="game-detail-image" src="ACM.jpg" alt="Assassin's Creed Mirage" />
+
+  <div class="rating">
+    <span class="stars">★ ★ ★ ★ ★</span>
+    <span>4.7</span>
+  </div>
+
+  <div class="buttons">
+    <button class="buy-now" id="checkout-button" onclick="window.location.href='pay-acmirage.html'">BUY NOW</button>
+  </div>
+
+  <div class="trailer-section">
+    <h2>Watch the Trailer</h2>
+    <div class="trailer-container">
+      <iframe 
+        src="https://www.youtube.com/embed/x55lAlFtXmw" 
+        title="Assassin's Creed Mirage Trailer"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div class="screenshots">
+    <h2>Screenshots :</h2>
+    <img src="ACMS1.jpg" alt="Screenshot 1" />
+    <img src="ACMS2.jpg" alt="Screenshot 2" />
+    <img src="ACMS3.jpg" alt="Screenshot 3" />
+  </div>
+
+  <div class="pc-specs">
+    <h2 style="color: red;">Note - PC Specifications</h2>
+    <img src="ACMSPCS.jpg" alt="PC Specification Table">
+  </div>
+
+  <div class="about-game">
+    <h2>About The Game</h2>
+    <p>
+      Assassin's Creed Mirage takes players back to the roots of the franchise with a focus on stealth, parkour, and assassination. 
+      Set in 9th-century Baghdad during the Islamic Golden Age, players take on the role of Basim Ibn Ishaq, a street thief who 
+      becomes entangled with the Hidden Ones. The game returns to the series' core gameplay elements, featuring a more compact 
+      and dense city environment perfect for parkour and stealth gameplay. With a renewed emphasis on social stealth, players 
+      must blend into crowds and use the environment to their advantage. The game's narrative explores Basim's journey from 
+      street thief to master assassin, while also delving into the rich history and culture of Baghdad during its golden age. 
+      Mirage offers a more focused and intimate experience compared to recent entries in the series, making it a perfect entry 
+      point for new players and a nostalgic return for longtime fans.
+    </p>
+  </div>
+
+  <div class="leave-reply">
+    <h2>Leave a Reply</h2>
+    <textarea placeholder="Write your review here..."></textarea>
+    <div class="reply-inputs">
+      <input type="text" placeholder="Name" />
+      <input type="email" placeholder="Email" />
+      <input type="text" placeholder="Website" />
+    </div>
+    <button class="post-reply-btn">Post Reply</button>
+  </div>
+
+  <script>
+    document.querySelectorAll('.screenshots img').forEach(img => {
+      img.addEventListener('click', function() {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '1000';
+        modal.style.cursor = 'pointer';
+        
+        const imgElement = document.createElement('img');
+        imgElement.src = this.src;
+        imgElement.alt = this.alt;
+        imgElement.style.maxHeight = '90vh';
+        imgElement.style.maxWidth = '90vw';
+        imgElement.style.objectFit = 'contain';
+        
+        modal.appendChild(imgElement);
+        modal.addEventListener('click', () => document.body.removeChild(modal));
+        
+        document.body.appendChild(modal);
+      });
+    });
+
+    document.querySelector('.post-reply-btn').addEventListener('click', function() {
+      const textarea = document.querySelector('.leave-reply textarea');
+      const nameInput = document.querySelector('.reply-inputs input[type="text"]');
+      const emailInput = document.querySelector('.reply-inputs input[type="email"]');
+      
+      if (!textarea.value.trim()) {
+        alert('Please write your review before submitting');
+        textarea.focus();
+        return;
+      }
+      
+      if (!nameInput.value.trim()) {
+        alert('Please enter your name');
+        nameInput.focus();
+        return;
+      }
+      
+      if (!emailInput.value.trim() || !emailInput.value.includes('@')) {
+        alert('Please enter a valid email address');
+        emailInput.focus();
+        return;
+      }
+      
+      alert('Thank you for your review! We appreciate your feedback.');
+      textarea.value = '';
+      nameInput.value = '';
+      emailInput.value = '';
+      document.querySelector('.reply-inputs input[type="text"]:last-child').value = '';
+    });
+  </script>
+</body>
+</html>

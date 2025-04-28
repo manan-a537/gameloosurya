@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game News Detail | Gameloo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .back-button {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background-color: #000;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    
+    .back-button:hover {
+      background-color: #333;
+    }
+    
+    .news-detail {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .news-hero {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+    
+    .news-content {
+      padding: 40px;
+    }
+    
+    .news-meta {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .news-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #000;
+    }
+    
+    .news-body {
+      margin-bottom: 30px;
+    }
+    
+    .news-body p {
+      margin-bottom: 20px;
+    }
+    
+    .news-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    
+    .news-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .related-news {
+      margin-top: 50px;
+    }
+    
+    .related-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #000;
+    }
+    
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .related-item {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .related-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .related-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .related-content {
+      padding: 20px;
+    }
+    
+    .related-item-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #000;
+    }
+    
+    .related-link {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    
+    @media (max-width: 768px) {
+      .news-hero {
+        height: 300px;
+      }
+      
+      .news-content {
+        padding: 20px;
+      }
+      
+      .news-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="products.html" class="back-button">← Back to Store</a>
+    
+    <div class="news-detail">
+      <div class="news-content">
+        <div class="news-meta">4 HOURS AGO • DEVELOPER INSIGHTS</div>
+        <h1 class="news-title">Detective tale and cosmic opera collide in psychedelic adventure Nirvana Noir</h1>
+        
+        <div class="news-body">
+          <p>In an exclusive interview with Gameloo, the creative team behind the upcoming psychedelic adventure game Nirvana Noir revealed how they're blending hardboiled detective fiction with cosmic horror elements to create a truly unique experience.</p>
+          
+          <img src="Nirvana.webp" alt="Development Team" class="news-image">
+          
+          <p>"We wanted to create something that feels both familiar and completely alien at the same time," explained lead designer Denis Abel. "The detective framework gives players something to hold onto while we take them on this wild journey through fractured realities."</p>
+          
+          <p>The game features a revolutionary time-bending mechanic that allows players to experience scenes from multiple perspectives simultaneously. "It's not just about solving a mystery," added writer Evan Anthony. "It's about understanding how perspective changes truth itself."</p>
+          
+          <h3>Key Features:</h3>
+          <ul>
+            <li>Non-linear narrative with multiple endings</li>
+            <li>Psychedelic visual effects that evolve with gameplay</li>
+            <li>Original jazz-noir soundtrack with dynamic composition</li>
+            <li>Mind-bending puzzles that play with perception</li>
+            <li>Fully voiced characters with branching dialogues</li>
+          </ul>
+          
+          <p>Nirvana Noir is scheduled for release on Gameloo in Q2 2024, with a special demo available to newsletter subscribers next month.</p>
+        </div>
+        
+        <div class="news-footer">
+          <p><strong>Developed by:</strong>Surya Dahiya</p>
+          <p><strong>Platforms:</strong> PC, PlayStation 5, Xbox Series X/S</p>
+          <p><strong>Release Date:</strong> June 15, 2025</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="related-news">
+      <h2 class="related-title">More News You Might Like</h2>
+      
+      <div class="related-grid">
+        <div class="related-item">
+          <img src="Diying.jpg" alt="Dying Light" class="related-image">
+          <div class="related-content">
+            <h3 class="related-item-title">Why fans should revisit the first Dying Light before The Beast launches</h3>
+            <a href="#" class="related-link">Read More →</a>
+          </div>
+        </div>
+        
+        <div class="related-item">
+          <img src="R.jpg" alt="Sniper Elite" class="related-image">
+          <div class="related-content">
+            <h3 class="related-item-title">New Shadow Operations DLC brings night missions to Sniper Elite 5</h3>
+            <a href="#" class="related-link">Read More →</a>
+          </div>
+        </div>
+        
+        <div class="related-item">
+          <img src="phasmophobiahalloween.jpg" alt="Phasmophobia" class="related-image">
+          <div class="related-content">
+            <h3 class="related-item-title">Phasmophobia's Halloween update introduces haunted carnival map</h3>
+            <a href="#" class="related-link">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get the current page URL
+    const currentPage = window.location.href;
+    
+    // Check if we're coming from a specific article link
+    if (sessionStorage.getItem('comingFromNews')) {
+      // Scroll to the content after back button click
+      window.scrollTo(0, 0);
+      sessionStorage.removeItem('comingFromNews');
+    }
+    
+    // Add click event to all news links
+    document.querySelectorAll('.related-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('comingFromNews', 'true');
+        window.location.href = 'news-detail.html'; // Change to your actual news detail page
+      });
+    });
+    
+    // Back button functionality
+    document.querySelector('.back-button').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'products.html';
+    });
+  </script>
+</body>
+</html>

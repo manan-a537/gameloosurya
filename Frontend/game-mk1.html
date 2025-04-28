@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mortal Kombat 1</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #000;
+      color: white;
+      padding: 10px 40px;
+      border: 2px solid white;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .back-button:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .game-detail-image {
+      width: 40%;
+      height: 700px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .rating {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+    
+    .rating .stars {
+      color: #FFD700;
+      margin-right: 10px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #00c853;
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    .buy-now {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00BB00;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .buy-now:hover {
+      background-color: #009900;
+      transform: translateY(-2px);
+    }
+
+    .buy-now:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+
+    .screenshots img,
+    .pc-specs img {
+      width: 70%;
+      border-radius: 5%;
+      margin-bottom: 15px;
+    }
+
+    .about-game {
+      margin-top: 40px;
+    }
+
+    .about-game h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00b4ff;
+    }
+
+    .about-game p {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .trailer-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .trailer-section h2 {
+      margin-bottom: 15px;
+      color: #00b4ff;
+    }
+
+    .trailer-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+
+    .trailer-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="back-buttons">
+    <a href="#" class="back-button" id="backButton">Back</a>
+  </div>
+
+  <h1>Mortal Kombat 1</h1>
+  <img class="game-detail-image" src="mk1.jpg" alt="Mortal Kombat 1" />
+
+  <div class="rating">
+    <span class="stars">★ ★ ★ ★ ★</span>
+    <span>4.9</span>
+  </div>
+
+  <div class="buttons">
+    <button class="buy-now" id="checkout-button">BUY NOW</button>
+  </div>
+
+  <!-- 🔥 Trailer Section Start -->
+  <div class="trailer-section">
+    <h2>Watch the Trailer</h2>
+    <div class="trailer-container">
+      <iframe 
+        src="https://www.youtube.com/embed/NYH2sLid0Zc" 
+        title="Mortal Kombat 1 - Official Gameplay Trailer"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  <!-- 🔥 Trailer Section End -->
+
+  <div class="screenshots">
+    <h2>Screenshots :</h2>
+    <img src="MK 1.jpg"Mortal Kombat 1 screenshot 1" />
+    <img src="MK 2.jpg" alt="Mortal Kombat 1 screenshot 2" />
+    <img src="MK 3.jpg" alt="Mortal Kombat 1 screenshot 3" />
+  </div>
+
+  <div class="pc-specs">
+    <h2 style="color: red;">Note - PC Specifications</h2>
+    <img src="MK sysreq.jpg" alt="Mortal Kombat 1 PC Specification Table">
+  </div>
+
+  <div class="about-game">
+    <h2>About The Game</h2>
+    <p>
+      Mortal Kombat 1 is the explosive rebirth of the iconic fighting franchise from NetherRealm Studios. 
+      Featuring a fresh timeline created by Fire God Liu Kang, the game introduces reimagined versions 
+      of classic characters with all-new backstories and fatalities. Experience next-gen visuals with 
+      the most brutal combat system yet, including the revolutionary Kameo Fighter system that allows 
+      for unprecedented team-up attacks. With its cinematic story mode, online multiplayer, and deepest 
+      combat mechanics in series history, Mortal Kombat 1 delivers the ultimate fighting game experience 
+      with the signature gore and violence fans expect.
+    </p>
+  </div>
+
+  <script>
+    // Check where user came from and set back button accordingly
+    document.addEventListener('DOMContentLoaded', function() {
+      const backButton = document.getElementById('backButton');
+      const referrer = document.referrer;
+      
+      if (referrer.includes('landing.html')) {
+        backButton.href = 'landing.html';
+        backButton.textContent = 'Back';
+      } else if (referrer.includes('products.html')) {
+        backButton.href = 'products.html';
+        backButton.textContent = 'Back to Store';
+      } else {
+        // Default to products page if referrer is unknown
+        backButton.href = 'products.html';
+      }
+    });
+
+    // Check if user is logged in
+    function checkLoginStatus() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) {
+        window.location.href = 'login.html';
+        return false;
+      }
+      return true;
+    }
+
+    document.getElementById('checkout-button').addEventListener('click', function() {
+      if (checkLoginStatus()) {
+        window.location.href = 'pay-mk1.html';
+      }
+    });
+
+    document.querySelectorAll('.screenshots img').forEach(img => {
+      img.addEventListener('click', function() {
+        alert('Opening full size screenshot: ' + this.alt);
+      });
+    });
+  </script>
+</body>
+</html>
